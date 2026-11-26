@@ -1,4 +1,5 @@
 from django.db import migrations
+from django.contrib.auth.hashers import make_password
 
 
 def seed_wadhwaniya_store(apps, schema_editor):
@@ -13,11 +14,10 @@ def seed_wadhwaniya_store(apps, schema_editor):
             first_name='Wadhwaniya',
             last_name='Provision Store',
             role='store_owner',
+            password=make_password('store123'),
             is_active=True,
             is_staff=False,
         )
-        user.set_password('store123')
-        user.save()
 
     store = GroceryStore.objects.filter(store_name__icontains='Wadhwaniya').first()
     if not store:
